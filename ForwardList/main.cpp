@@ -32,7 +32,7 @@ public:
 		size = 0;
 		cout << "LConstructor:\t" << this << endl;
 	}
-	ForwardList(unsigned int size) : ForwardList()
+	ForwardList(unsigned int size)
 	{
 		for (int i = 0; i < size; i++)
 		{
@@ -69,7 +69,22 @@ public:
 			Temp = Temp->pNext;
 		}
 		Temp->pNext = New;
+
 		size++;
+	}
+
+	void pop_front()
+	{
+		if (Head == nullptr)return;
+		Element* buffer = Head;
+		Head = buffer->pNext;
+		delete buffer;
+		size--;
+	}
+
+	void pop_back()
+	{
+		if (Head == nullptr)return;
 	}
 
 	//                  Methods:
@@ -95,6 +110,9 @@ void main()
 	{
 		list.push_front(rand() % 100);
 	}*/
+	list.push_front(3);
 	list.push_back(8);
+	list.print();
+	list.pop_front();
 	list.print();
 }

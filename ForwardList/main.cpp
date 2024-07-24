@@ -32,7 +32,7 @@ public:
 		size = 0;
 		cout << "LConstructor:\t" << this << endl;
 	}
-	ForwardList(unsigned int size)
+	ForwardList(unsigned int size):ForwardList()
 	{
 		for (int i = 0; i < size; i++)
 		{

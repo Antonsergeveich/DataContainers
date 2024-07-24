@@ -32,6 +32,13 @@ public:
 		size = 0;
 		cout << "LConstructor:\t" << this << endl;
 	}
+	ForwardList(unsigned int size) : ForwardList()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			push_front(rand() % 100);
+		}
+	}
 	~ForwardList()
 	{
 		cout << "LDestructor:\t" << this << endl;
@@ -81,13 +88,13 @@ public:
 void main()
 {
 	setlocale(LC_ALL, "");
-	int n;
-	cout << "Введите количество элементов списка: "; cin >> n;
-	ForwardList list;
-	for (int i = 0; i < n; i++)
+	/*int n;
+	cout << "Введите количество элементов списка: "; cin >> n;*/
+	ForwardList list(3);
+	/*for (int i = 0; i < n; i++)
 	{
 		list.push_front(rand() % 100);
-	}
+	}*/
 	list.push_back(8);
 	list.print();
 }

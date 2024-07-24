@@ -43,11 +43,33 @@ public:
 
 		//2) Пристыковываем новый элемент к началу списка:
 		New->pNext = Head;
+
+		//3) Голову перенаправляем на новый элемент:
+		Head = New;
+	}
+
+	//                  Methods:
+	void print()const
+	{
+		Element* Temp = Head;   //Temp - это итератор.
+		//Итератор - это указатель, при помощи которого можно получить доступ к элементам структуры данных.  
+		while (Temp)
+		{
+			cout << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
+			Temp = Temp->pNext; //Переход на следующий элемент.
+		}
 	}
 };
 
 void main()
 {
 	setlocale(LC_ALL, "");
-	ForwardList List;
+	int n;
+	cout << "Введите количество элементов списка: "; cin >> n;
+	ForwardList list;
+	for (int i = 0; i < n; i++)
+	{
+		list.push_front(rand() % 100);
+	}
+	list.print();
 }

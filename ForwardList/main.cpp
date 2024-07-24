@@ -114,6 +114,7 @@ void main()
 	/*int n;
 	cout << "Введите количество элементов списка: "; cin >> n;*/
 	ForwardList list(3);
+	list.print();
 	/*for (int i = 0; i < n; i++)
 	{
 		list.push_front(rand() % 100);
@@ -122,7 +123,6 @@ void main()
 	list.push_back(8);
 	list.print();
 	list.pop_front();
-	list.print();
 	list.pop_back();
 	list.print();
 }

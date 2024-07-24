@@ -68,8 +68,7 @@ public:
 		{
 			Temp = Temp->pNext;
 		}
-		Temp->pNext = New;
-
+		Temp->pNext = New;// После того как мы оказались в конце списка, можно добавлять новый элемент
 		size++;
 	}
 

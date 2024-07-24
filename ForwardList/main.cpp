@@ -61,7 +61,7 @@ public:
 		{
 			Temp = Temp->pNext;
 		}
-		Temp->pNext = new Element(Data);
+		Temp->pNext = New;
 		size++;
 	}
 
@@ -84,14 +84,10 @@ void main()
 	int n;
 	cout << "Введите количество элементов списка: "; cin >> n;
 	ForwardList list;
-	/*for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	{
 		list.push_front(rand() % 100);
 	}
-	list.print();*/
-	for (int i = 0; i < n; i++)
-	{
-		list.push_back(rand() % 100);
-	}
+	list.push_back(8);
 	list.print();
 }

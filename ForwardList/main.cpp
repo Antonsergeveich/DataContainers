@@ -85,6 +85,14 @@ public:
 	void pop_back()
 	{
 		if (Head == nullptr)return;
+		Element* Temp = Head;
+		while (Temp->pNext->pNext)
+		{
+			Temp = Temp->pNext;
+		}
+		delete Temp->pNext;
+		Temp->pNext = nullptr;
+		size--;
 	}
 
 	//                  Methods:
@@ -114,5 +122,7 @@ void main()
 	list.push_back(8);
 	list.print();
 	list.pop_front();
+	list.print();
+	list.pop_back();
 	list.print();
 }

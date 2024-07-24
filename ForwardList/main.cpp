@@ -23,11 +23,13 @@ public:
 class ForwardList
 {
 	Element* Head; //Голова списка, указывает на начальный элемент списка
+	unsigned int size; //Размер списка
 public:
 	ForwardList()
 	{
 		//Конструктор по умолчанию который создаёт пустой список
 		Head = nullptr;
+		size = 0;
 		cout << "LConstructor:\t" << this << endl;
 	}
 	~ForwardList()
@@ -46,6 +48,21 @@ public:
 
 		//3) Голову перенаправляем на новый элемент:
 		Head = New;
+
+		size++;
+	}
+
+	void push_back(int Data)
+	{
+		if (Head == nullptr)return push_front(Data); //если список пустой, добавляем элемент вначало списка
+		Element* New = new Element(Data); //Создаём новый элемент
+		Element* Temp = Head; //Создаём указатель на текущий элемент
+		while (Temp->pNext)//Пока текущий элемент не указывает на ноль переходим на следующий элемент списка
+		{
+			Temp = Temp->pNext;
+		}
+		Temp->pNext = new Element(Data);
+		size++;
 	}
 
 	//                  Methods:
@@ -67,9 +84,14 @@ void main()
 	int n;
 	cout << "Введите количество элементов списка: "; cin >> n;
 	ForwardList list;
-	for (int i = 0; i < n; i++)
+	/*for (int i = 0; i < n; i++)
 	{
 		list.push_front(rand() % 100);
+	}
+	list.print();*/
+	for (int i = 0; i < n; i++)
+	{
+		list.push_back(rand() % 100);
 	}
 	list.print();
 }

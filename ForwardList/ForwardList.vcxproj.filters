@@ -19,4 +19,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="D:\Lessons\C++\push_front.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Lessons\C++\push_back.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Lessons\C++\List.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Lessons\C++\Iterator.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

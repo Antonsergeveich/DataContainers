@@ -129,6 +129,12 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="D:\Lessons\C++\Iterator.png" />
+    <Image Include="D:\Lessons\C++\List.png" />
+    <Image Include="D:\Lessons\C++\push_back.png" />
+    <Image Include="D:\Lessons\C++\push_front.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

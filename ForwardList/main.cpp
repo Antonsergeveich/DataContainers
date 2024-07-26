@@ -1,10 +1,11 @@
-﻿#include<iostream>
+﻿//doubly linked list (двухсвязный список)
+#include<iostream>
 using namespace std;
 
 #define tab "\t"
 #define delimiter "\n------------------------------\n"
 
-class Element
+class Element //Описывает структуру элемента
 {
 	int Data;          //Значение элемента
 	Element* pNext;    //Pointer to Next - указатель на следующий элемент
@@ -20,7 +21,7 @@ public:
 	friend class ForwardList;
 };
 
-class ForwardList
+class ForwardList //односвязный список
 {
 	Element* Head; //Голова списка, указывает на начальный элемент списка
 	unsigned int size; //Размер списка
@@ -85,13 +86,30 @@ public:
 	{
 		if (Head == nullptr)return;
 		Element* Temp = Head;
-		while (Temp->pNext->pNext)
+		while (Temp->pNext->pNext)//В условии обращаемся к указателю pNext
+	    //элемента Temp, который указывает на pNext следующего элемента.
+	    //Если указатель pNext следующего элемента равен ноль,
+		//то такого элемента нет, условие не выполняется.
 		{
-			Temp = Temp->pNext;
+			Temp = Temp->pNext; //Проходим по элементам списка
 		}
 		delete Temp->pNext;
 		Temp->pNext = nullptr;
 		size--;
+	}
+
+	void insert(int Data, int index) //Вставляет элемент по индексу
+	{
+		if (index > size)return;
+		Element* New = new Element(Data); //Выделяем память под новый элемент
+		Element* Temp = Head; //Создаём итератор который будет указывать на текущий элемент в списке
+		for (int i = 0; i < index - 1; i++) // идём по списку до элемента перед добавляемым
+		{
+			Temp = Temp->pNext; 
+		}
+		New->pNext = Temp->pNext; // записываем в добавляемый элемент адрес следующего элемента
+		Temp->pNext = New; // в текущий записываем добавляем
+		size++;
 	}
 
 	//                  Methods:
@@ -111,17 +129,20 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	/*int n;
-	cout << "Введите количество элементов списка: "; cin >> n;*/
-	ForwardList list(3);
-	list.print();
-	/*for (int i = 0; i < n; i++)
+	cout << "Введите количество элементов списка: "; cin >> n;
+	for (int i = 0; i < n; i++)
 	{
 		list.push_front(rand() % 100);
 	}*/
-	list.push_front(3);
+	ForwardList list(5);
+	list.print();
+	list.push_front(5);
 	list.push_back(8);
 	list.print();
 	list.pop_front();
 	list.pop_back();
+	list.print();
+	cout << endl;
+	list.insert(123,1);
 	list.print();
 }

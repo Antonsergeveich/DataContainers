@@ -33,7 +33,7 @@ public:
 		size = 0;
 		cout << "LConstructor:\t" << this << endl;
 	}
-	ForwardList(unsigned int size):ForwardList()
+	ForwardList(unsigned int size) :ForwardList()
 	{
 		for (int i = 0; i < size; i++)
 		{
@@ -41,8 +41,12 @@ public:
 		}
 	}
 	~ForwardList()
-	{
-		cout << "LDestructor:\t" << this << endl;
+	{ 
+		for (int i = 0; i < size; i++)
+		{
+			pop_front();
+			cout << "LDestructor:\t" << this << endl;
+		}
 	}
 
 	//            Adding elements (добавление элемента): 
@@ -87,10 +91,10 @@ public:
 		if (Head == nullptr)return;
 		Element* Temp = Head;
 		while (Temp->pNext->pNext)//В условии обращаемся к указателю pNext
-	    //элемента Temp, который указывает на pNext следующего элемента.
-	    //Если указатель pNext следующего элемента равен ноль,
-		//то такого элемента нет, условие не выполняется.
-	    //pNext (указатель), pNext-> (элемент)
+			//элемента Temp, который указывает на pNext следующего элемента.
+			//Если указатель pNext следующего элемента равен ноль,
+			//то такого элемента нет, условие не выполняется.
+			//pNext (указатель), pNext-> (элемент)
 		{
 			Temp = Temp->pNext; //Проходим по элементам списка
 		}
@@ -136,9 +140,9 @@ void main()
 	{
 		list.push_front(rand() % 100);
 	}*/
-	ForwardList list(5);
+	ForwardList list(3);
 	list.print();
-	list.push_front(5);
+	/*list.push_front(5);
 	list.push_back(8);
 	list.print();
 	list.pop_front();
@@ -146,5 +150,5 @@ void main()
 	list.print();
 	cout << endl;
 	list.insert(123,1);
-	list.print();
+	list.print();*/
 }

@@ -9,17 +9,21 @@ class Element //Описывает структуру элемента
 {
 	int Data;          //Значение элемента
 	Element* pNext;    //Pointer to Next - указатель на следующий элемент
+	static int count;
 public:
 	Element(int Data, Element* pNext = nullptr) :Data(Data), pNext(pNext)
 	{
+		count++;
 		cout << "EConstructor:\t" << this << endl;
 	}
 	~Element()
 	{
+		count--;
 		cout << "EDestructor:\t" << this << endl;
 	}
 	friend class ForwardList;
 };
+int Element::count = 0;
 
 class ForwardList //односвязный список
 {
@@ -42,10 +46,11 @@ public:
 	}
 	~ForwardList()
 	{
-		for (int i = 0; i = size; i++)
+		while (Head)pop_front(); //Пока Head не ноль true цикл работает, false конец. 
+		/*for (int i = 0; i = size; i++)
 		{
 			pop_front();
-		}
+		}*/
 		cout << "LDestructor:\t" << this << endl;
 	}
 
@@ -64,7 +69,7 @@ public:
 		size++;
 	}
 
-	void push_back(int Data)
+	void push_back(int Data) 
 	{
 		if (Head == nullptr)return push_front(Data); //если список пустой, добавляем элемент вначало списка
 		Element* New = new Element(Data); //Создаём новый элемент
@@ -77,19 +82,29 @@ public:
 		size++;
 	}
 
+	//               Removing elements:
+
 	void pop_front()
 	{
 		if (Head == nullptr)return;
-		Element* buffer = Head;
-		Head = buffer->pNext;
-		delete buffer;
+		//1)Запоминаем адрес удаляемого элемента:
+		Element* Erased = Head;
+		//2)Исключаем удаляемый элемент из списка:
+		Head = Erased->pNext;
+		//3)Удаляем элемент из памяти:
+		delete Erased;
 		size--;
+		/*new - создаёт объект в динамической памяти
+		new[] - создаёт массив объектов в динамической памяти
+		
+		delete - удаляет один объект в динамической памяти
+		delete[] - удаляет массив объектов из динамической памяти*/
 	}
 
 	void pop_back()
 	{
-		if (Head == nullptr)return;
-		Element* Temp = Head;
+		if (Head->pNext == nullptr)return pop_front();
+		Element* Temp = Head; // В односвязный список можно зайти только через голову
 		while (Temp->pNext->pNext)//В условии обращаемся к указателю pNext
 			//элемента Temp, который указывает на pNext следующего элемента.
 			//Если указатель pNext следующего элемента равен ноль,
@@ -98,22 +113,31 @@ public:
 		{
 			Temp = Temp->pNext; //Проходим по элементам списка
 		}
+		//2) Удаляем последний элемент из памяти:
 		delete Temp->pNext;
+		//3) Обнуляем указатель на последний элемент:
 		Temp->pNext = nullptr;
 		size--;
 	}
 
 	void insert(int Data, int index) //Вставляет элемент по индексу
 	{
-		if (index > size)return;
+		if (index > size)
+		{
+			cout << "Error: out of range" << endl;
+			return;
+		}
+		if (index == 0)return push_front(Data);
+		//if (index > size)return;
 		Element* New = new Element(Data); //Выделяем память под новый элемент
 		Element* Temp = Head; //Создаём итератор который будет указывать на текущий элемент в списке
 		for (int i = 0; i < index - 1; i++) //идём по списку до элемента перед добавляемым
 		{
-			Temp = Temp->pNext;
+			if (Temp->pNext == nullptr)break;
+				Temp = Temp->pNext;
 		}
-		New->pNext = Temp->pNext; // записываем в добавляемый элемент адрес следующего элемента
-		Temp->pNext = New; // в текущий записываем добавляемый
+		New->pNext = Temp->pNext; //записываем в добавляемый элемент адрес следующего элемента
+		Temp->pNext = New; //в текущий записываем добавляемый
 		size++;
 	}
 
@@ -128,6 +152,8 @@ public:
 			cout << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
 			Temp = Temp->pNext; //Переход на следующий элемент.
 		}
+		cout << "Количество элементов списка: " << size << endl;
+		cout << "Общее количество элементов: " << Element::count << endl;
 	}
 };
 

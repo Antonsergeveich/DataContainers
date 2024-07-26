@@ -41,12 +41,15 @@ public:
 		}
 	}
 	~ForwardList()
-	{ 
-		for (int i = 0; i < size; i++)
+	{
+		if (Head->pNext != nullptr)
 		{
-			pop_front();
-			cout << "LDestructor:\t" << this << endl;
+			for (int i = 0; i = size; i++)
+			{
+				pop_front();
+			}
 		}
+			cout << "LDestructor:\t" << this << endl;
 	}
 
 	//            Adding elements (добавление элемента): 
@@ -140,7 +143,7 @@ void main()
 	{
 		list.push_front(rand() % 100);
 	}*/
-	ForwardList list(3);
+	ForwardList list(5);
 	list.print();
 	/*list.push_front(5);
 	list.push_back(8);

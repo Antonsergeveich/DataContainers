@@ -42,14 +42,11 @@ public:
 	}
 	~ForwardList()
 	{
-		if (Head->pNext != nullptr)
+		for (int i = 0; i = size; i++)
 		{
-			for (int i = 0; i = size; i++)
-			{
-				pop_front();
-			}
+			pop_front();
 		}
-			cout << "LDestructor:\t" << this << endl;
+		cout << "LDestructor:\t" << this << endl;
 	}
 
 	//            Adding elements (добавление элемента): 
@@ -113,7 +110,7 @@ public:
 		Element* Temp = Head; //Создаём итератор который будет указывать на текущий элемент в списке
 		for (int i = 0; i < index - 1; i++) //идём по списку до элемента перед добавляемым
 		{
-			Temp = Temp->pNext; 
+			Temp = Temp->pNext;
 		}
 		New->pNext = Temp->pNext; // записываем в добавляемый элемент адрес следующего элемента
 		Temp->pNext = New; // в текущий записываем добавляемый
@@ -143,7 +140,7 @@ void main()
 	{
 		list.push_front(rand() % 100);
 	}*/
-	ForwardList list(5);
+	ForwardList list(7);
 	list.print();
 	/*list.push_front(5);
 	list.push_back(8);

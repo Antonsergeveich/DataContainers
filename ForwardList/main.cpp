@@ -68,7 +68,7 @@ public:
 
 	~ForwardList()
 	{
-		while (Head)pop_back(); //Пока Head указывает на какой-то элемент (всё что не ноль true) цикл работает, на ноль - false конец. 
+		while (Head)pop_front(); //Пока Head указывает на какой-то элемент (всё что не ноль true) цикл работает, на ноль - false конец. 
 		/*for (int i = 0; i = size; i++)
 		{
 			pop_front();
@@ -225,12 +225,16 @@ public:
 	//                  Methods:
 	void print()const
 	{
-		Element* Temp = Head;   //Temp - это итератор.
+		/*Element* Temp = Head; */  //Temp - это итератор.
 		//Итератор - это указатель, при помощи которого можно получить доступ к элементам структуры данных.  
-		while (Temp)
+		//while (Temp)
+		//{
+		//	cout << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
+		//	Temp = Temp->pNext; //Переход на следующий элемент.
+		//}
+		for (Element* Temp = Head; Temp; Temp = Temp->pNext)
 		{
 			cout << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
-			Temp = Temp->pNext; //Переход на следующий элемент.
 		}
 		cout << "Количество элементов списка: " << size << endl;
 		cout << "Общее количество элементов: " << Element::count << endl;
@@ -309,7 +313,7 @@ for (int i = 0; i < n; i++)
 	list1.push_back(21);
 	list1.print();
 
-	ForwardList list2;
+	/*ForwardList list2;
 	list2.push_back(34);
 	list2.push_back(55);
 	list2.push_back(89);
@@ -318,5 +322,5 @@ for (int i = 0; i < n; i++)
 	ForwardList list3 = list1 + list2;
 	list3.print();
 	list2 = list1 + list2;
-	list3.print();
+	list3.print();*/
 }

@@ -298,4 +298,6 @@ for (int i = 0; i < n; i++)
 
 	ForwardList list3 = list1 + list2;
 	list3.print();
+	list2 = list1 + list2;
+	list3.print();
 }

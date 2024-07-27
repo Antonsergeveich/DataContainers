@@ -202,6 +202,25 @@ public:
 		Temp->pNext = New; //в текущий записываем добавляемый
 		size++;
 	}
+	void erase(int index)
+	{
+		if (index > size)
+		{
+			cout << "Error: out of range" << endl;
+			return;
+		}
+		if (index == 0)return pop_front();
+		Element* Temp = Head;//Создаём итератор и начинаем идти по элементам с головы списка
+		for (int i = 0; i < index - 1; i++)//Идём до нужного элемента
+		{
+			if (Temp->pNext == nullptr)break;
+			Temp = Temp->pNext;
+		}
+		Element* Erased = Temp->pNext; // Сохраняем удаляемый элемент
+		Temp->pNext = Temp->pNext->pNext; // убираем элемент из списка
+		delete Erased;// удаляем элемент из памяти
+		size--;
+	}
 
 	//                  Methods:
 	void print()const

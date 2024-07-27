@@ -63,9 +63,13 @@ public:
 	ForwardList(ForwardList&& other) : ForwardList()
 	{
 		*this = std::move(other); //Функция std::move() принудительно вызывает MoveAssignment для класса
-		cout << "MoveConstructor:" << this << endl;
+		cout << "MoveConstructor:" << this << endl; //Конструктор перемещения
 	}
-
+	//Когда функция возвращает значение по значению
+	//на месте вызова создаётся временный константный безымянный объект 
+	//Когда существующий или создаваемый объект
+	//инициализируется возвращаемым значением какой-то функции,
+	//тогда неявно вызывается MoveAssignment, MoveConstructor
 	~ForwardList()
 	{
 		while (Head)pop_front(); //Пока Head указывает на какой-то элемент (всё что не ноль true) цикл работает, на ноль - false конец. 
@@ -225,7 +229,7 @@ public:
 	//                  Methods:
 	void print()const
 	{
-		/*Element* Temp = Head; */  //Temp - это итератор.
+		//Element* Temp = Head;   //Temp - это итератор.
 		//Итератор - это указатель, при помощи которого можно получить доступ к элементам структуры данных.  
 		//while (Temp)
 		//{
@@ -313,13 +317,13 @@ for (int i = 0; i < n; i++)
 	list1.push_back(21);
 	list1.print();
 
-	/*ForwardList list2;
+	ForwardList list2;
 	list2.push_back(34);
 	list2.push_back(55);
 	list2.push_back(89);
 	list2.print();
 
-	ForwardList list3 = list1 + list2;
+	/*ForwardList list3 = list1 + list2;
 	list3.print();
 	list2 = list1 + list2;
 	list3.print();*/

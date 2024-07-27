@@ -60,6 +60,11 @@ public:
 		*this = other; //Повторно используем код CopyAssignment
 		cout << "CopyConstructor:\t" << this << endl;
 	}
+	ForwardList(ForwardList&& other) : ForwardList()
+	{
+		*this = std::move(other); //Функция std::move() принудительно вызывает MoveAssignment для класса
+		cout << "MoveConstructor:" << this << endl;
+	}
 
 	~ForwardList()
 	{
@@ -85,6 +90,7 @@ public:
 	ForwardList& operator=(ForwardList&& other)
 	{
 		if (this == &other)return *this;
+		this->~ForwardList();
 		this->Head = other.Head;
 		this->size = other.size;
 		other.Head = nullptr;

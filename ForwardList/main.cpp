@@ -2,6 +2,10 @@
 #include<iostream>
 using namespace std;
 
+using std::cin;
+using std::cout;
+using std::endl;
+
 #define tab "\t"
 #define delimiter "\n------------------------------\n"
 
@@ -30,6 +34,10 @@ class ForwardList //односвязный список
 	Element* Head; //Голова списка, указывает на начальный элемент списка
 	unsigned int size; //Размер списка
 public:
+	int get_size()const
+	{
+		return size;
+	}
 	ForwardList()
 	{
 		//Конструктор по умолчанию который создаёт пустой список
@@ -37,21 +45,69 @@ public:
 		size = 0;
 		cout << "LConstructor:\t" << this << endl;
 	}
-	ForwardList(unsigned int size) :ForwardList()
+	explicit ForwardList(unsigned int size) : ForwardList() //explicit запрещает не явное преобразование типов
 	{
-		for (int i = 0; i < size; i++)
+		while (size--)push_front(0);
+		/*for (int i = 0; i < size; i++)
 		{
 			push_front(rand() % 100);
-		}
+		}*/
 	}
+	ForwardList(const ForwardList& other) : ForwardList()
+	{
+		/*for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)
+			push_back(Temp->Data);*/
+		*this = other; //Повторно используем код CopyAssignment
+		cout << "CopyConstructor:\t" << this << endl;
+	}
+
 	~ForwardList()
 	{
-		while (Head)pop_front(); //Пока Head указывает на какой-то элемент (всё что не ноль true) цикл работает, на ноль - false конец. 
+		while (Head)pop_back(); //Пока Head указывает на какой-то элемент (всё что не ноль true) цикл работает, на ноль - false конец. 
 		/*for (int i = 0; i = size; i++)
 		{
 			pop_front();
 		}*/
 		cout << "LDestructor:\t" << this << endl;
+	}
+
+	//                 Operators:
+	ForwardList& operator=(const ForwardList& other)
+	{
+		if (this == &other)return *this;
+		//while (Head)pop_front();
+		this->~ForwardList();
+		for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)
+			push_back(Temp->Data);
+		cout << "CopyAssignment:\t" << this << endl;
+		return *this;
+	}
+	ForwardList& operator=(ForwardList&& other)
+	{
+		if (this == &other)return *this;
+		this->Head = other.Head;
+		this->size = other.size;
+		other.Head = nullptr;
+		other.size = 0;
+		cout << "MoveAssignment:\t" << this << endl;
+	}
+
+	const int& operator[](int index)const //Когда возврвщаем значение по значению
+		//то на месте вызова создаётся временный безымянный объект, 
+		//а временный безымянный объект по умолчанию константный, 
+		//поэтому возвращаем по ссылке чтобы небыло ошибки C2106, E0137
+		//Error	E0137 expression must be a modifiable lvalue	
+		//Error	C2106	'=': left operand must be l - value	
+	{
+		Element* Temp = Head;
+		for (int i = 0; i < index; i++)Temp = Temp->pNext;
+		return Temp->Data;
+	}
+	int& operator[](int index)
+	{
+		Element* Temp = Head;
+		for (int i = 0; i < index; i++)Temp = Temp->pNext;
+		return Temp->Data;
 	}
 
 	//            Adding elements (добавление элемента): 
@@ -141,7 +197,6 @@ public:
 		size++;
 	}
 
-
 	//                  Methods:
 	void print()const
 	{
@@ -157,8 +212,18 @@ public:
 	}
 };
 
+ForwardList operator+(const ForwardList& left, const ForwardList& right)
+{
+	ForwardList buffer;
+	for (int i = 0; i < left.get_size(); i++)buffer.push_back(left[i]);
+	for (int i = 0; i < right.get_size(); i++)buffer.push_back(right[i]);
+	return buffer;
+}
+
 //#define BASE_CHECK 
 //#define COUNT_CHECK
+//#define SIZE_CONSTRUCTOR_CHECK
+
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -198,4 +263,33 @@ for (int i = 0; i < n; i++)
 	list2.print();
 #endif // COUNT_CHECK
 
+#ifdef SIZE_CONSTRUCTOR_CHECK
+	ForwardList list(7);
+	for (int i = 0; i < list.get_size(); i++)
+	{
+		list[i] = rand() % 100;
+	}
+	for (int i = 0; i < list.get_size(); i++)
+	{
+		cout << list[i] << tab;
+	}
+	cout << endl;
+#endif // SIZE_CONSTRUCTOR_CHECK
+
+	ForwardList list1;
+	list1.push_back(3);
+	list1.push_back(5);
+	list1.push_back(8);
+	list1.push_back(13);
+	list1.push_back(21);
+	list1.print();
+
+	ForwardList list2;
+	list2.push_back(34);
+	list2.push_back(55);
+	list2.push_back(89);
+	list2.print();
+
+	ForwardList list3 = list1 + list2;
+	list3.print();
 }

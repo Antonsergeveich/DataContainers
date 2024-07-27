@@ -46,7 +46,7 @@ public:
 	}
 	~ForwardList()
 	{
-		while (Head)pop_front(); //Пока Head не ноль true цикл работает, false конец. 
+		while (Head)pop_front(); //Пока Head указывает на какой-то элемент (всё что не ноль true) цикл работает, на ноль - false конец. 
 		/*for (int i = 0; i = size; i++)
 		{
 			pop_front();
@@ -86,7 +86,7 @@ public:
 
 	void pop_front()
 	{
-		if (Head == nullptr)return;
+		if (Head == nullptr)return; //если возвращаемое значение void, то return просто прерывает работу функции и возвращает управление на место вызова
 		//1)Запоминаем адрес удаляемого элемента:
 		Element* Erased = Head;
 		//2)Исключаем удаляемый элемент из списка:
@@ -157,18 +157,21 @@ public:
 	}
 };
 
+//#define BASE_CHECK 
+//#define COUNT_CHECK
 void main()
 {
 	setlocale(LC_ALL, "");
+#ifdef BASE_CHECK
 	/*int n;
-	cout << "Введите количество элементов списка: "; cin >> n;
-	for (int i = 0; i < n; i++)
-	{
-		list.push_front(rand() % 100);
-	}*/
+cout << "Введите количество элементов списка: "; cin >> n;
+for (int i = 0; i < n; i++)
+{
+	list.push_front(rand() % 100);
+}*/
 	ForwardList list(7);
 	list.print();
-	/*list.push_front(5);
+	list.push_front(5);
 	list.push_back(8);
 	list.print();
 	list.pop_front();
@@ -176,5 +179,23 @@ void main()
 	list.print();
 	cout << endl;
 	list.insert(123,1);
-	list.print();*/
+	list.print();
+#endif // BASE_CHECK
+
+#ifdef COUNT_CHECK
+	ForwardList list1;
+	list1.push_back(3);
+	list1.push_back(5);
+	list1.push_back(8);
+	list1.push_back(13);
+	list1.push_back(21);
+	list1.print();
+
+	ForwardList list2;
+	list2.push_back(34);
+	list2.push_back(55);
+	list2.push_back(89);
+	list2.print();
+#endif // COUNT_CHECK
+
 }

@@ -123,15 +123,17 @@ public:
 	//            Adding elements (добавление элемента): 
 	void push_front(int Data)
 	{
-		//1) Создаём новый элемент:
-		Element* New = new Element(Data); //оператор new вызывает конструктор класса
+		////1) Создаём новый элемент:
+		//Element* New = new Element(Data); //оператор new вызывает конструктор класса
 
-		//2) Пристыковываем новый элемент к началу списка:
-		New->pNext = Head;
+		////2) Пристыковываем новый элемент к началу списка:
+		//New->pNext = Head;
 
-		//3) Голову перенаправляем на новый элемент:
-		Head = New;
+		////3) Голову перенаправляем на новый элемент:
+		//Head = New;
 
+		Head = new Element(Data, Head);
+		 
 		size++;
 	}
 
@@ -198,15 +200,15 @@ public:
 		}
 		if (index == 0)return push_front(Data);
 		//if (index > size)return;
-		Element* New = new Element(Data); //Выделяем память под новый элемент
+		//Element* New = new Element(Data); //Выделяем память под новый элемент
 		Element* Temp = Head; //Создаём итератор который будет указывать на текущий элемент в списке
 		for (int i = 0; i < index - 1; i++) //идём по списку до элемента перед добавляемым
 		{
 			if (Temp->pNext == nullptr)break;
 				Temp = Temp->pNext;
 		}
-		New->pNext = Temp->pNext; //записываем в добавляемый элемент адрес следующего элемента
-		Temp->pNext = New; //в текущий записываем добавляемый
+		//New->pNext = Temp->pNext; //записываем в добавляемый элемент адрес следующего элемента
+		Temp->pNext = new Element(Data, Temp->pNext); //в текущий записываем добавляемый
 		size++;
 	}
 	void erase(int index)

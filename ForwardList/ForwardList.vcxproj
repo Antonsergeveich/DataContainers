@@ -130,6 +130,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="D:\Lessons\C++\DataConteiners\ForwardListSample.png" />
+    <Image Include="D:\Lessons\C++\DataConteiners\pop_back.png" />
+    <Image Include="D:\Lessons\C++\DataConteiners\pop_front.png" />
     <Image Include="D:\Lessons\C++\Iterator.png" />
     <Image Include="D:\Lessons\C++\List.png" />
     <Image Include="D:\Lessons\C++\push_back.png" />

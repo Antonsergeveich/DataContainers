@@ -137,9 +137,12 @@ public:
 
 	void push_back(int Data) 
 	{
+		//Поскольку push_back() НЕ умеет работать с пустым списком, мы проверяем,
+		//если список пуст, вызываем метод push_front(), который УМЕЕТ работать с пустым списком.
 		if (Head == nullptr)return push_front(Data); //если список пустой, добавляем элемент вначало списка
 		Element* New = new Element(Data); //Создаём новый элемент
 		Element* Temp = Head; //Создаём указатель на текущий элемент
+		//while((*Temp).pNext)
 		while (Temp->pNext)//Пока текущий элемент не указывает на ноль переходим на следующий элемент списка
 		{
 			Temp = Temp->pNext;
@@ -261,22 +264,24 @@ void main()
 {
 	setlocale(LC_ALL, "");
 #ifdef BASE_CHECK
-	/*int n;
-cout << "Введите количество элементов списка: "; cin >> n;
-for (int i = 0; i < n; i++)
-{
-	list.push_front(rand() % 100);
-}*/
-	ForwardList list(7);
+	int n;
+	cout << "Введите воличество элементов списка: "; cin >> n;
+	ForwardList list;
+	for (int i = 0; i < n; i++)
+	{
+		//list.push_front(rand() % 100);
+		list.push_back(rand() % 100);
+	}
 	list.print();
-	list.push_front(5);
-	list.push_back(8);
+	/*list.push_back(123);
 	list.print();
 	list.pop_front();
-	list.pop_back();
-	list.print();
-	cout << endl;
-	list.insert(123,1);
+	list.print();*/
+	int index;
+	int value;
+	cout << "Введите индекс добавляемого элемента: "; cin >> index;
+	cout << "Введите значение добавляемого элемента: "; cin >> value;
+	list.insert(index, value);
 	list.print();
 #endif // BASE_CHECK
 
@@ -323,8 +328,12 @@ for (int i = 0; i < n; i++)
 	list2.push_back(89);
 	list2.print();
 
-	/*ForwardList list3 = list1 + list2;
+	cout << delimiter << endl;
+	//ForwardList list3 = list1 + list2;	//CopyConstructor
+	cout << delimiter << endl;
+	ForwardList list3;
+	cout << delimiter << endl;
+	list3 = list1 + list2;	//CopyAssignment
+	cout << delimiter << endl;
 	list3.print();
-	list2 = list1 + list2;
-	list3.print();*/
 }

@@ -32,5 +32,14 @@
     <Image Include="D:\Lessons\C++\Iterator.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="D:\Lessons\C++\DataConteiners\ForwardListSample.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Lessons\C++\DataConteiners\pop_back.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="D:\Lessons\C++\DataConteiners\pop_front.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

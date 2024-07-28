@@ -81,17 +81,17 @@ public:
 	}
 
 	//                 Operators:
-	ForwardList& operator=(const ForwardList& other)
+	ForwardList& operator = (const ForwardList& other)
 	{
 		if (this == &other)return *this;
 		//while (Head)pop_front();
 		this->~ForwardList();
 		for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)
-			push_back(Temp->Data);
+			push_front(Temp->Data);
 		cout << "CopyAssignment:\t" << this << endl;
 		return *this;
 	}
-	ForwardList& operator=(ForwardList&& other)
+	ForwardList& operator = (ForwardList&& other)
 	{
 		if (this == &other)return *this;
 		this->~ForwardList();
@@ -272,7 +272,7 @@ void main()
 	for (int i = 0; i < n; i++)
 	{
 		//list.push_front(rand() % 100);
-		list.push_back(rand() % 100);
+		list.push_front(rand() % 100);
 	}
 	list.print();
 	list.push_back(123);

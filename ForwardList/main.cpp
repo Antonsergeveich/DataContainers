@@ -140,14 +140,14 @@ public:
 		//Поскольку push_back() НЕ умеет работать с пустым списком, мы проверяем,
 		//если список пуст, вызываем метод push_front(), который УМЕЕТ работать с пустым списком.
 		if (Head == nullptr)return push_front(Data); //если список пустой, добавляем элемент вначало списка
-		Element* New = new Element(Data); //Создаём новый элемент
+		//Element* New = new Element(Data); //Создаём новый элемент
 		Element* Temp = Head; //Создаём указатель на текущий элемент
 		//while((*Temp).pNext)
 		while (Temp->pNext)//Пока текущий элемент не указывает на ноль переходим на следующий элемент списка
 		{
 			Temp = Temp->pNext;
 		}
-		Temp->pNext = New;// После того как мы оказались в конце списка, можно добавлять новый элемент
+		Temp->pNext = new Element(Data);// После того как мы оказались в конце списка, можно добавлять новый элемент
 		size++;
 	}
 
@@ -189,7 +189,7 @@ public:
 		size--;
 	}
 
-	void insert(int Data, int index) //Вставляет элемент по индексу
+	void insert(int index, int Data) //Вставляет элемент по индексу
 	{
 		if (index > size)
 		{
@@ -256,7 +256,7 @@ ForwardList operator+(const ForwardList& left, const ForwardList& right)
 	return buffer;
 }
 
-//#define BASE_CHECK 
+#define BASE_CHECK 
 //#define COUNT_CHECK
 //#define SIZE_CONSTRUCTOR_CHECK
 
@@ -273,10 +273,10 @@ void main()
 		list.push_back(rand() % 100);
 	}
 	list.print();
-	/*list.push_back(123);
+	list.push_back(123);
 	list.print();
 	list.pop_front();
-	list.print();*/
+	list.print();
 	int index;
 	int value;
 	cout << "Введите индекс добавляемого элемента: "; cin >> index;
@@ -314,26 +314,26 @@ void main()
 	cout << endl;
 #endif // SIZE_CONSTRUCTOR_CHECK
 
-	ForwardList list1;
-	list1.push_back(3);
-	list1.push_back(5);
-	list1.push_back(8);
-	list1.push_back(13);
-	list1.push_back(21);
-	list1.print();
+	//ForwardList list1;
+	//list1.push_back(3);
+	//list1.push_back(5);
+	//list1.push_back(8);
+	//list1.push_back(13);
+	//list1.push_back(21);
+	//list1.print();
 
-	ForwardList list2;
-	list2.push_back(34);
-	list2.push_back(55);
-	list2.push_back(89);
-	list2.print();
+	//ForwardList list2;
+	//list2.push_back(34);
+	//list2.push_back(55);
+	//list2.push_back(89);
+	//list2.print();
 
-	cout << delimiter << endl;
-	//ForwardList list3 = list1 + list2;	//CopyConstructor
-	cout << delimiter << endl;
-	ForwardList list3;
-	cout << delimiter << endl;
-	list3 = list1 + list2;	//CopyAssignment
-	cout << delimiter << endl;
-	list3.print();
+	//cout << delimiter << endl;
+	////ForwardList list3 = list1 + list2;	//CopyConstructor
+	//cout << delimiter << endl;
+	//ForwardList list3;
+	//cout << delimiter << endl;
+	//list3 = list1 + list2;	//CopyAssignment
+	//cout << delimiter << endl;
+	//list3.print();
 }

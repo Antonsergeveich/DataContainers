@@ -1,5 +1,4 @@
-﻿//doubly linked list (двухсвязный список)
-#include<iostream>
+﻿#include<iostream>
 using namespace std;
 
 using std::cin;

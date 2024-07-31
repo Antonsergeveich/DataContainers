@@ -28,12 +28,51 @@ public:
 	friend class ForwardList;
 };
 int Element::count = 0;
+class Iterator
+{
+	Element* Temp;
+public:
+	//E0415	no suitable constructor exists to convert from "Element *" to "Iterator"
+	//не существует подходящего конструктора для преобразования
+	//из "Element *" в "Iterator".
+	Iterator(Element* Temp)
+	{
+		cout << "IConstructor:\t" << this << endl;
+	}
+	~Iterator()
+	{
+		cout << "IDestructor:\t" << this << endl;
+	}
+	//E0349	no operator "!=" matches these operands	
+	//оператор "!=" не соответствует этим операндам
+	//C2676	binary '!=': 'Iterator' does not define this operator
+	//or a conversion to a type acceptable to the predefined operator	
+	//C2676 двоичный код '!=': 'Iterator' не определяет этот оператор
+	//или преобразование к типу, приемлемому для предопределенного оператора
+	//C2675	unary '++': 'Iterator' does not define this operator
+	//or a conversion to a type acceptable to the predefined operator
+	//C2100	you cannot dereference an operand of type 'Iterator'
+	//C2100 не удается разыменовать операнд типа 'Iterator' в списке
+	//C2440	'initializing': cannot convert from 'Iterator' to 'int'
+	//C2440 "Инициализация": не удается преобразовать из списка
+	//'Iterator' в 'int' 
+};
 
 class ForwardList //односвязный список
 {
 	Element* Head; //Голова списка, указывает на начальный элемент списка
 	unsigned int size; //Размер списка
 public:
+	Iterator begin() 
+		//E0020 identifier "Iterator" is undefined	
+		//Идентификатор "Iterator" не определен
+	{
+		return Head;
+	}
+	Iterator end()
+	{
+		return nullptr;
+	}
 	int get_size()const
 	{
 		return size;
@@ -77,7 +116,8 @@ public:
 		//У любого контейнера в обязательном порядке есть два метода: 
 		// 1) begin() - возвращает итератор на начало контейнера.
 		// 2) end() - возвращает итератор на конец контейнера.
-		// initializer list всякий раз неявно создаётся при перечислении однотипных значений в фигурных скобках через запятую
+		// initializer_list всякий раз неявно создаётся при 
+		// перечислении однотипных значений в фигурных скобках через запятую
 		//il.
 		for (const int* it = il.begin(); it != il.end(); it++)
 		{
@@ -417,7 +457,7 @@ void main()
 
 #ifdef RANGED_BASED_FOR_LIST
 	ForwardList list = { 3,5,8,13,21 };
-	list.print();
+	//list.print();
 	for (int i : list)
 	{
 		//Error E2291 this range - based 'for' statement requires a suitable

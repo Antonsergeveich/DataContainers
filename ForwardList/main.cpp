@@ -272,12 +272,28 @@ ForwardList operator+(const ForwardList& left, const ForwardList& right)
 	for (int i = 0; i < right.get_size(); i++)buffer.push_back(right[i]);
 	return buffer;
 }
+void Print(int arr[])
+{
+	//cout << typeid(arr).name() << endl;
+	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
+	{
+		cout << arr[i] << tab;
+	}
+	cout << endl;
+
+	/*for (int i : arr)
+	{
+		cout << i << tab;
+	}
+	cout << endl;*/
+}
 
 //#define BASE_CHECK 
 //#define COUNT_CHECK
 //#define SIZE_CONSTRUCTOR_CHECK
 //#define OPERATOR_PLUS_CHECK
 //#define INITIALIZER_LIST_CONSTRUCTOR_CHECK
+//#define RANGE_BASE_FOR_ARRAY
 
 void main()
 {
@@ -367,7 +383,9 @@ void main()
 	list1.print();
 #endif // INITIALIZER_LIST_CONSTRUCTOR_CHECK
 
+#ifdef RANGE_BASE_FOR_ARRAY
 	int arr[] = { 3,5,8,13,21 };
+	//int* arr = new int[5] {3, 5, 8, 13, 21};
 	for (int i = 0; i < sizeof(arr) / sizeof(int); i++)
 	{
 		cout << arr[i] << tab;
@@ -375,7 +393,7 @@ void main()
 	cout << endl;
 
 	//Range-based for:
-	for (int i : arr)
+	for (int i : arr) //Цикл for на основе диапазона
 	{
 		cout << i << tab;
 	}
@@ -383,5 +401,16 @@ void main()
 	//т.е. контейнером иногда называют 'range';
 	//Следовательно, Range-base for - это цикл for для контейнеров. 
 	cout << endl;
+	cout << typeid(arr).name() << endl;
+	Print(arr);
+	//delete[] arr;  
+#endif // RANGE_BASE_FOR_ARRAY
 
+	ForwardList list = { 3,5,8,13,21 };
+	list.print();
+	for (int i : list)
+	{
+		cout << i << tab;
+	}
+	cout << endl;
 }

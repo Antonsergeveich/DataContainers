@@ -70,6 +70,21 @@ public:
 	//Когда существующий или создаваемый объект
 	//инициализируется возвращаемым значением какой-то функции,
 	//тогда неявно вызывается MoveAssignment, MoveConstructor
+	ForwardList(const initializer_list<int>& il) : ForwardList() //Single-argument constructor
+	{
+		//initializer_list (список инициализации) - это контейнер, так же как и ForwardList
+		//Контейнер - это объект, который органинизует хранение других однотипных объектов в памяти.
+		//У любого контейнера в обязательном порядке есть два метода: 
+		// 1) begin() - возвращает итератор на начало контейнера.
+		// 2) end() - возвращает итератор на конец контейнера.
+		// initializer list всякий раз неявно создаётся при перечислении однотипных значений в фигурных скобках через запятую
+		//il.
+		for (const int* it = il.begin(); it != il.end(); it++)
+		{
+			//it - iterator
+			push_back(*it);
+		}
+	}
 	~ForwardList()
 	{
 		while (Head)pop_front(); //Пока Head указывает на какой-то элемент (всё что не ноль true) цикл работает, на ноль - false конец. 
@@ -252,15 +267,17 @@ public:
 
 ForwardList operator+(const ForwardList& left, const ForwardList& right)
 {
-	ForwardList buffer;
-	for (int i = 0; i < left.get_size(); i++)buffer.push_back(left[i]);
+	ForwardList buffer = left;
+	//for (int i = 0; i < left.get_size(); i++)buffer.push_back(left[i]);
 	for (int i = 0; i < right.get_size(); i++)buffer.push_back(right[i]);
 	return buffer;
 }
 
-#define BASE_CHECK 
+//#define BASE_CHECK 
 //#define COUNT_CHECK
 //#define SIZE_CONSTRUCTOR_CHECK
+//#define OPERATOR_PLUS_CHECK
+//#define INITIALIZER_LIST_CONSTRUCTOR_CHECK
 
 void main()
 {
@@ -316,26 +333,55 @@ void main()
 	cout << endl;
 #endif // SIZE_CONSTRUCTOR_CHECK
 
+#ifdef OPERATOR_PLUS_CHECK
 	//ForwardList list1;
-	//list1.push_back(3);
-	//list1.push_back(5);
-	//list1.push_back(8);
-	//list1.push_back(13);
-	//list1.push_back(21);
-	//list1.print();
+//list1.push_back(3);
+//list1.push_back(5);
+//list1.push_back(8);
+//list1.push_back(13);
+//list1.push_back(21);
+//list1.print();
 
-	//ForwardList list2;
-	//list2.push_back(34);
-	//list2.push_back(55);
-	//list2.push_back(89);
-	//list2.print();
+//ForwardList list2;
+//list2.push_back(34);
+//list2.push_back(55);
+//list2.push_back(89);
+//list2.print();
 
-	//cout << delimiter << endl;
-	////ForwardList list3 = list1 + list2;	//CopyConstructor
-	//cout << delimiter << endl;
-	//ForwardList list3;
-	//cout << delimiter << endl;
-	//list3 = list1 + list2;	//CopyAssignment
-	//cout << delimiter << endl;
-	//list3.print();
+//cout << delimiter << endl;
+////ForwardList list3 = list1 + list2;	//CopyConstructor
+//cout << delimiter << endl;
+//ForwardList list3;
+//cout << delimiter << endl;
+//list3 = list1 + list2;	//CopyAssignment
+//cout << delimiter << endl;
+//list3.print();  
+#endif // OPERATOR_PLUS_CHECK
+
+#ifdef INITIALIZER_LIST_CONSTRUCTOR_CHECK
+	ForwardList list1 = { 3,5,8,13,21 };
+	//Чтобы преобразовать из других типов в наш тип
+	//нужен конструктор с одним параметром(Single-argument constructor)
+	//и оператор присваивания (CopyAssignment) 
+	//причём второй без первого не работает;
+	list1.print();
+#endif // INITIALIZER_LIST_CONSTRUCTOR_CHECK
+
+	int arr[] = { 3,5,8,13,21 };
+	for (int i = 0; i < sizeof(arr) / sizeof(int); i++)
+	{
+		cout << arr[i] << tab;
+	}
+	cout << endl;
+
+	//Range-based for:
+	for (int i : arr)
+	{
+		cout << i << tab;
+	}
+	//Range - это диапазон. Под данным термином в этом контексте понимают контейнер;
+	//т.е. контейнером иногда называют 'range';
+	//Следовательно, Range-base for - это цикл for для контейнеров. 
+	cout << endl;
+
 }

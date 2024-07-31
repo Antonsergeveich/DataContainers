@@ -85,7 +85,6 @@ public:
 		return Temp->Data;
 	}
 };
-
 class ForwardList //односвязный список
 {
 	Element* Head; //Голова списка, указывает на начальный элемент списка

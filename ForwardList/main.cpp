@@ -26,6 +26,7 @@ public:
 		cout << "EDestructor:\t" << this << endl;
 	}
 	friend class ForwardList;
+	friend class Iterator;
 };
 int Element::count = 0;
 class Iterator
@@ -35,7 +36,7 @@ public:
 	//E0415	no suitable constructor exists to convert from "Element *" to "Iterator"
 	//не существует подходящего конструктора для преобразования
 	//из "Element *" в "Iterator".
-	Iterator(Element* Temp)
+	Iterator(Element* Temp) : Temp(Temp)
 	{
 		cout << "IConstructor:\t" << this << endl;
 	}
@@ -56,6 +57,33 @@ public:
 	//C2440	'initializing': cannot convert from 'Iterator' to 'int'
 	//C2440 "Инициализация": не удается преобразовать из списка
 	//'Iterator' в 'int' 
+	Iterator& operator++()
+	{
+		Temp = Temp->pNext;
+		return *this;
+	}
+	Iterator operator++(int)
+	{
+		Iterator old = *this;
+		Temp = Temp->pNext;
+		return old;
+	}
+	bool operator ==(const Iterator& other)const
+	{
+		return this->Temp == other.Temp;
+	}
+	bool operator !=(const Iterator& other)const
+	{
+		return this->Temp != other.Temp;
+	}
+	int operator*()
+	{
+		return Temp->Data;
+	}
+	int& operator*()const
+	{
+		return Temp->Data;
+	}
 };
 
 class ForwardList //односвязный список
@@ -475,6 +503,10 @@ void main()
 		//Error	C2100 you cannot dereference an operand of type 'int'	
 		//вы не можете разыменовать операнд типа 'int'
 		cout << i << tab;
+	}
+	for (Iterator it = list.begin(); it != list.end(); ++it)
+	{
+		cout << *it << tab;
 	}
 	cout << endl;
 #endif // RANGED_BASED_FOR_LIST

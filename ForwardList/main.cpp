@@ -117,7 +117,8 @@ public:
 		cout << "MoveAssignment:\t" << this << endl;
 	}
 
-	const int& operator[](int index)const //Когда возврвщаем значение по значению
+	const int& operator[](int index)const
+		//Когда возврвщаем значение по значению
 		//то на месте вызова создаётся временный безымянный объект, 
 		//а временный безымянный объект по умолчанию константный, 
 		//поэтому возвращаем по ссылке чтобы небыло ошибки C2106, E0137
@@ -424,7 +425,7 @@ void main()
 		//для этого оператора 'for', основанного на диапазоне,
 		//требуется подходящая функция "begin", но она не найдена;
 		//Error	C2672 'begin': no matching overloaded function found
-		//(не найдена соответствующая перегруженная функция)
+		//не найдена соответствующая перегруженная функция
 		//Error	C2672 'end': no matching overloaded function found	
 		//Error	C3536 '<begin>$L0': cannot be used before it is initialized	
 		//не может быть использован до его инициализации

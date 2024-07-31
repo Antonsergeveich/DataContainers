@@ -441,7 +441,9 @@ void main()
 	cout << endl;
 
 	//Range-based for:
-	for (int i : arr) //Цикл for на основе диапазона
+	for (int i : arr) //Цикл for на основе диапазона; 
+	//Тип int переменной i будет использоваться для вычисления количества
+	//элементов контейнера (sizeof(arr) / sizeof(int)) в цикле for;
 	{
 		cout << i << tab;
 	}

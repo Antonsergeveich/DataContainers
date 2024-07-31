@@ -273,8 +273,14 @@ ForwardList operator+(const ForwardList& left, const ForwardList& right)
 	return buffer;
 }
 void Print(int arr[])
+//в функцию копируется указатель на массив arr, а не весь массив,
+//поэтому будет выведено количество элементов один,
+//а не количество элементов всего массива, так как 
+//sizeof(arr) / sizeof(arr[0]) = 4/4 = 1, а не размер всего массива
+//в байтах делённый на размер одного элемента в байтах;
 {
 	//cout << typeid(arr).name() << endl;
+	//cout << sizeof(arr) << endl;
 	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
 	{
 		cout << arr[i] << tab;
@@ -398,6 +404,7 @@ void main()
 	{
 		cout << i << tab;
 	}
+    https://legacy.cplusplus.com/doc/tutorial/control/#:~:text=equal%20to%2050.-,Range%2Dbased%20for%20loop,-The%20for%2Dloop
 	//Range - это диапазон. Под данным термином в этом контексте понимают контейнер;
 	//т.е. контейнером иногда называют 'range';
 	//Следовательно, Range-base for - это цикл for для контейнеров. 

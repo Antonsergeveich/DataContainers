@@ -293,7 +293,8 @@ void Print(int arr[])
 //#define SIZE_CONSTRUCTOR_CHECK
 //#define OPERATOR_PLUS_CHECK
 //#define INITIALIZER_LIST_CONSTRUCTOR_CHECK
-//#define RANGE_BASE_FOR_ARRAY
+//#define RANGE_BASED_FOR_ARRAY
+#define RANGED_BASED_FOR_LIST
 
 void main()
 {
@@ -383,7 +384,7 @@ void main()
 	list1.print();
 #endif // INITIALIZER_LIST_CONSTRUCTOR_CHECK
 
-#ifdef RANGE_BASE_FOR_ARRAY
+#ifdef RANGE_BASED_FOR_ARRAY
 	int arr[] = { 3,5,8,13,21 };
 	//int* arr = new int[5] {3, 5, 8, 13, 21};
 	for (int i = 0; i < sizeof(arr) / sizeof(int); i++)
@@ -404,13 +405,28 @@ void main()
 	cout << typeid(arr).name() << endl;
 	Print(arr);
 	//delete[] arr;  
-#endif // RANGE_BASE_FOR_ARRAY
+#endif // RANGE_BASED_FOR_ARRAY
 
+#ifdef RANGED_BASED_FOR_LIST
 	ForwardList list = { 3,5,8,13,21 };
 	list.print();
 	for (int i : list)
 	{
+		//Error E2291 this range - based 'for' statement requires a suitable
+		//"begin" function and none was found;
+		//для этого оператора 'for', основанного на диапазоне,
+		//требуется подходящая функция "begin", но она не найдена;
+		//Error	C2672 'begin': no matching overloaded function found
+		//(не найдена соответствующая перегруженная функция)
+		//Error	C2672 'end': no matching overloaded function found	
+		//Error	C3536 '<begin>$L0': cannot be used before it is initialized	
+		//не может быть использован до его инициализации
+		//Error	C3536 '<end>$L0': cannot be used before it is initialized	
+		//Error	C2100 you cannot dereference an operand of type 'int'	
+		//вы не можете разыменовать операнд типа 'int'
 		cout << i << tab;
 	}
 	cout << endl;
+#endif // RANGED_BASED_FOR_LIST
+
 }
